@@ -122,6 +122,7 @@ namespace HumaneSociety
             db.SubmitChanges();
         }
         
+       
         internal static void AddUsernameAndPassword(Employee employee)
         {
             Employee employeeFromDb = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
@@ -138,7 +139,15 @@ namespace HumaneSociety
 
             if (employeeFromDb == null)
             {
-                throw new NullReferenceException();
+                Employee newEmployeeUser = new Employee();
+                newEmployeeUser.Email = email;
+                newEmployeeUser.EmployeeNumber = employeeNumber;
+
+                db.Employees.InsertOnSubmit(newEmployeeUser);
+                db.SubmitChanges();
+
+                employeeFromDb = newEmployeeUser;
+                return employeeFromDb;
             }
             else
             {
@@ -166,8 +175,58 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+            switch (crudOperation)
+            {
+                case "create":
+                    AddEmployee(employee);
+                    break;
+                case "read":
+                    ReadEmployee(employee);
+                    break;
+                case "update":
+                    UpdateEmployee(employee);
+                    break;
+                case "delete":
+                    DeleteEmployee(employee);
+                    break;
+                default:
+                    break;
+            }
         }
+
+        private static void AddEmployee(Employee employee)
+        {
+            
+        }
+
+        internal static void AddEmployee(string firstName, string lastName, string userName, string password, int employeeNumber, string email)
+        {
+            Employee newEmployee = new Employee();
+
+            newEmployee.FirstName = firstName;
+            newEmployee.LastName = lastName;
+            newEmployee.UserName = userName;
+            newEmployee.Password = password;
+            newEmployee.EmployeeNumber = employeeNumber;
+            newEmployee.Email = email;
+
+            db.Employees.InsertOnSubmit(newEmployee);
+            db.SubmitChanges();
+
+        }
+        internal static void ReadEmployee(Employee employeeToRead)
+        {
+
+        }
+        internal static void UpdateEmployee(Employee employeeToUpdate)
+        {
+
+        }
+        internal static void DeleteEmployee(Employee employeeToDelete)
+        {
+
+        }
+
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
