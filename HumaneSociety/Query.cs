@@ -50,6 +50,7 @@ namespace HumaneSociety
             return allEmployees;
         }
 
+        
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int stateId)
         {
             Client newClient = new Client();
@@ -208,7 +209,7 @@ namespace HumaneSociety
             }
         }
 
-        private static void ReadEmployee(object employeeNumber)
+        private static void ReadEmployee(Employee employeeNumber)
         {
             
         }
@@ -217,6 +218,13 @@ namespace HumaneSociety
         {
             
         }
+
+
+
+        //public static string GetProperties()
+        //{
+        //    return string.Join(" ", )
+        //}
 
         internal static void AddEmployee(string firstName, string lastName, string userName, string password, int employeeNumber, string email)
         {
@@ -235,30 +243,31 @@ namespace HumaneSociety
 
         internal static void ReadEmployee(int employeeNumber)
         {
-            //Employee employee;
+            //Employee employeNumber = new Employee();
 
-            Employee allEmployees = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
+            Employee employeeFromDb = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).FirstOrDefault();
 
-
-            Console.WriteLine(allEmployees);
+            Console.WriteLine(employeeFromDb.FirstName);
         }
-        //internal static void ReadEmployee(Employee allEmployees)
-        //{
-
-        //}
 
 
-        internal static void UpdateEmployee(Employee employeeToUpdate)
+        internal static void UpdateEmployee(Employee employee)
         {
 
         }
 
 
-        internal static void DeleteEmployee(Employee employeeToDelete)
+        internal static void DeleteEmployee(Employee employee)
         {
 
         }
 
+
+        // TODO: Animal Multi-Trait Search
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        {
+            throw new NotImplementedException();
+        }
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
@@ -272,7 +281,7 @@ namespace HumaneSociety
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
+        {
             throw new NotImplementedException();
         }
 
@@ -280,33 +289,55 @@ namespace HumaneSociety
         {
             throw new NotImplementedException();
         }
-        
-        // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
-        {
-            throw new NotImplementedException();
-        }
-         
-        // TODO: Misc Animal Things
-        internal static int GetCategoryId(string categoryName)
-        {
-            throw new NotImplementedException();
-        }
-        
-        internal static Room GetRoom(int animalId)
-        {
-            throw new NotImplementedException();
-        }
-        
-        internal static int GetDietPlanId(string dietPlanName)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+        //internal static int GetCategoryId(string categoryName)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //internal static Room GetRoom(int animalId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //internal static int GetDietPlanId(string dietPlanName)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         // TODO: Adoption CRUD Operations
+
+        internal static void RunAdoptionQueries(Animal animal, Client client, string crudOperation)
+        {
+            switch (crudOperation)
+            {
+                case "create":
+                    Adopt(animal, client);
+                    break;
+                case "read":
+                    //Iqueryable?
+                    break;
+                case "update":
+                    UpdateAdoption(animal, client);
+                    break;
+                case "delete":
+                    RemoveAdoption(animal, client);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void UpdateAdoption(object isAdopted, object adoption)
+        {
+            
+        }
+
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -316,12 +347,12 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            throw new NotImplementedException();
+            
         }
 
         // TODO: Shots Stuff
