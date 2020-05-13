@@ -133,7 +133,7 @@ namespace HumaneSociety
             db.SubmitChanges();
         }
 
-        internal static Employee RetrieveEmployeeUser(string email, int employeeNumber)
+        internal static Employee RetrieveEmployeeUser(string email, int employeeNumber) //Hello Jackson
         {
             Employee employeeFromDb = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber).FirstOrDefault();
 
