@@ -248,6 +248,8 @@ namespace HumaneSociety
             Employee employeeFromDb = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).FirstOrDefault();
 
             Console.WriteLine(employeeFromDb.FirstName);
+            Console.WriteLine(employeeFromDb.LastName);
+            Console.WriteLine(employeeFromDb.EmployeeNumber);
         }
 
 
@@ -290,6 +292,15 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
+        internal static void GetDietPlanId(Animal animal)
+        {
+
+        }
+        internal static void GetCategoryId(Animal animal)
+        {
+
+        }
+
 
 
         //internal static int GetCategoryId(string categoryName)
@@ -330,14 +341,23 @@ namespace HumaneSociety
             }
         }
 
+        private static void RemoveAdoption(Animal animal, Client client)
+        {
+            
+        }
+
         private static void UpdateAdoption(object isAdopted, object adoption)
         {
             
         }
 
-        internal static void Adopt(Animal animal, Client client)
+        internal static void StartAdopt(int clientId, int animalId, int adoptionFee)
         {
-            
+            Adoption adoption = new Adoption();
+
+            adoption.ClientId = clientId;
+            adoption.AnimalId = animalId;
+            adoption.AdoptionFee = adoptionFee;
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
