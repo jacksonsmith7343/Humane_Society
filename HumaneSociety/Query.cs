@@ -36,6 +36,20 @@ namespace HumaneSociety
             return allClients;
         }
 
+        internal static Employee GetEmployee(string firstName, string lastName)
+        {
+            Employee employee = db.Employees.Where(e => e.FirstName == firstName && e.LastName == lastName).FirstOrDefault();
+
+            return employee;
+        }
+
+        internal static List<Employee> GetEmployees()
+        {
+            List<Employee> allEmployees = db.Employees.ToList();
+
+            return allEmployees;
+        }
+
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int stateId)
         {
             Client newClient = new Client();
@@ -194,6 +208,11 @@ namespace HumaneSociety
             }
         }
 
+        private static void ReadEmployee(object employeeNumber)
+        {
+            
+        }
+
         private static void AddEmployee(Employee employee)
         {
             
@@ -212,16 +231,29 @@ namespace HumaneSociety
 
             db.Employees.InsertOnSubmit(newEmployee);
             db.SubmitChanges();
-
         }
-        internal static void ReadEmployee(Employee employeeToRead)
+
+        internal static void ReadEmployee(int employeeNumber)
         {
+            //Employee employee;
 
+            Employee allEmployees = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
+
+
+            Console.WriteLine(allEmployees);
         }
+        //internal static void ReadEmployee(Employee allEmployees)
+        //{
+
+        //}
+
+
         internal static void UpdateEmployee(Employee employeeToUpdate)
         {
 
         }
+
+
         internal static void DeleteEmployee(Employee employeeToDelete)
         {
 
