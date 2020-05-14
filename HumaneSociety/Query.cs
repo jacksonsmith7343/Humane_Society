@@ -186,7 +186,6 @@ namespace HumaneSociety
 
 
         //// TODO Items: ////
-        
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
@@ -210,21 +209,12 @@ namespace HumaneSociety
         }
 
         private static void ReadEmployee(Employee employeeNumber)
-        {
-            
+        {  
         }
 
         private static void AddEmployee(Employee employee)
-        {
-            
+        {   
         }
-
-
-
-        //public static string GetProperties()
-        //{
-        //    return string.Join(" ", )
-        //}
 
         internal static void AddEmployee(string firstName, string lastName, string userName, string password, int employeeNumber, string email)
         {
@@ -243,8 +233,6 @@ namespace HumaneSociety
 
         internal static void ReadEmployee(int employeeNumber)
         {
-            //Employee employeNumber = new Employee();
-
             Employee employeeFromDb = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).FirstOrDefault();
 
             Console.WriteLine(employeeFromDb.FirstName);
@@ -252,15 +240,34 @@ namespace HumaneSociety
             Console.WriteLine(employeeFromDb.EmployeeNumber);
         }
 
-
-        internal static void UpdateEmployee(Employee employee)
+        internal static void UpdateEmployee(Employee employeeWithUpdates)
         {
+            Employee employeeFromDb = null;
+            try
+            {
+                employeeFromDb = db.Employees.Where(e => e.EmployeeId == employeeWithUpdates.EmployeeId).Single();
+            }
+            catch (InvalidOperationException c)
+            {
+                Console.WriteLine("No employees have an EmployeeId that matches the employee passed in.");
+                Console.WriteLine("No updates have been made.");
+                return;
+            }
 
+            employeeFromDb.FirstName = employeeWithUpdates.FirstName;
+            employeeFromDb.LastName = employeeWithUpdates.LastName;
+            employeeFromDb.UserName = employeeWithUpdates.UserName;
+            employeeFromDb.Password = employeeWithUpdates.Password;
+            employeeFromDb.Email = employeeWithUpdates.Email;
+
+            db.Employees.InsertOnSubmit(employeeFromDb);
+            db.SubmitChanges();
         }
 
-
-        internal static void DeleteEmployee(Employee employee)
+        internal static void DeleteEmployee(Employee employeeDelete)
         {
+            Employee employeeFromDb;
+
 
         }
 
@@ -296,30 +303,14 @@ namespace HumaneSociety
         {
 
         }
+
         internal static void GetCategoryId(Animal animal)
         {
 
         }
 
 
-
-        //internal static int GetCategoryId(string categoryName)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //internal static Room GetRoom(int animalId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //internal static int GetDietPlanId(string dietPlanName)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         // TODO: Adoption CRUD Operations
-
         internal static void RunAdoptionQueries(Animal animal, Client client, string crudOperation)
         {
             switch (crudOperation)
@@ -341,23 +332,24 @@ namespace HumaneSociety
             }
         }
 
+        private static void Adopt(Animal animal, Client client)
+        {  
+        }
+
         private static void RemoveAdoption(Animal animal, Client client)
         {
-            
         }
 
         private static void UpdateAdoption(object isAdopted, object adoption)
-        {
-            
+        {  
         }
 
-        internal static void StartAdopt(int clientId, int animalId, int adoptionFee)
+        internal static void Adopt(int animal, int client)
         {
             Adoption adoption = new Adoption();
 
-            adoption.ClientId = clientId;
-            adoption.AnimalId = animalId;
-            adoption.AdoptionFee = adoptionFee;
+            adoption.AnimalId = animal;
+            adoption.ClientId = client;
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -365,15 +357,41 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
+        internal static void UpdateAdoption(Adoption adoptionUpdates)
         {
-            
+            Animal animal = null;
+
+            try
+            {
+                Adoption updateApproval = db.Adoptions.Where(a => a.ApprovalStatus == adoptionUpdates.ApprovalStatus).Single();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine("No animals with that status available.");
+                Console.WriteLine("No updates have been made.");
+                return;
+            }
+
+            animal.AdoptionStatus = adoptionUpdates.ApprovalStatus;
+
+            db.SubmitChanges();
         }
 
-        internal static void RemoveAdoption(int animalId, int clientId)
+        internal static void RemoveAdoption(Adoption adoptionRemove)
         {
-            
+            Animal animal = null;
+
+            try
+            {
+                
+            }
+            catch (InvalidOperationException f)
+            {
+
+            }
         }
+
+
 
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
