@@ -271,6 +271,54 @@ namespace HumaneSociety
 
         }
 
+        //TODO: Animal CRUD Operations
+        internal static void RunAnimalQueries(Animal animal, string crudOperation)
+        {
+            switch (crudOperation)
+            {
+                case "create":
+                    AddAnimal(animal);
+                    break;
+                case "read":
+                    ReadAnimal(animal);
+                    break;
+                case "update":
+                    //UpdateAnimal();
+                    break;
+                case "delete":
+                    RemoveAnimal(animal);
+                    break;
+                default:
+                    break;
+
+            }
+
+        }
+
+        internal static void AddAnimal(Animal animal)
+        {
+            AddAnimal(animal);
+        }
+
+        internal static void ReadAnimal(Animal animal)
+        {
+            RemoveAnimal(animal);
+        }
+
+        internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
+        {
+            UpdateAnimal(animalId, updates);
+        }
+
+        internal static void RemoveAnimal(Animal animal)
+        {
+            RemoveAnimal(animal);
+        }
+
+        internal static void GetAnimalByID(int animalId)
+        {
+            GetAnimalByID(animalId);
+        }
 
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
@@ -288,6 +336,32 @@ namespace HumaneSociety
         {
             throw new NotImplementedException();
         }
+
+
+        // TODO: Animal Multi-Trait Search
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?use a switch case to switch on the dictionary key
+        {
+            //switch(item.key)
+            //    case "1":
+            //    Console.WriteLine(db.Animals[0]);
+            //    break;
+            //case "2":
+            //    Console.WriteLine(db.Animals[1]);
+            //    break;
+            //case "3":
+            //    Console.WriteLine(db.Animals[2]);
+            //    break;
+            //case "4":
+            //    Console.WriteLine(db.Animals[3]);
+            //    break;
+            //case "4":
+            //    Console.WriteLine(db.Animals[4]);
+            //    break;
+
+            throw new NotImplementedException();
+        }
+
+
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
