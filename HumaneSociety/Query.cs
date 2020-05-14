@@ -295,9 +295,22 @@ namespace HumaneSociety
 
         }
 
-        internal static void AddAnimal(Animal animal)
+        internal static void AddAnimal(int categoryId, string name, int age, string demeanor, string kidFriendly, string petFriendly, int weight, string dietPlan)
         {
-            AddAnimal(animal);
+            Animal newAnimal = new Animal(); //Added criteria into this on 5/14 @ 11:27am ~ Steve
+
+            newAnimal.CategoryId = categoryId;
+            newAnimal.Name = name;
+            newAnimal.Age = age;
+            newAnimal.Demeanor = demeanor;
+            newAnimal.KidFriendly = kidFriendly;
+            newAnimal.PetFriendly = petFriendly;
+            newAnimal.Weight = weight;
+            newAnimal.DietPlanId = dietPlan;
+
+            db.Animals.InsertOnSubmit(newAnimal);
+            db.SubmitChanges();
+            //AddAnimal(animal);
         }
 
         internal static void ReadAnimal(Animal animal)
@@ -327,12 +340,12 @@ namespace HumaneSociety
         }
 
         // TODO: Animal CRUD Operations
-        internal static void AddAnimal(Animal animal)
+        private static void AddAnimal(Animal animal)
         {
             throw new NotImplementedException();
         }
 
-        internal static Animal GetAnimalByID(int id)
+        private static void GetAnimalByID(Animal animalId)
         {
             throw new NotImplementedException();
         }
